@@ -23,7 +23,6 @@ export default function Home() {
         'callback': (response) => {
           // onSendNumber();
           console.log("reponse");
-          console.log(response);
         }
       });
     }
@@ -34,12 +33,10 @@ export default function Home() {
     const recaptcha = window.recaptchaVerifier;
     signInWithPhoneNumber(auth, numero, recaptcha).then((confirmationResult) => {
       window.confirmationResult = confirmationResult;
-      console.log("reusi code evoyer");
       toast.success(`Code envoye au numero ${numero}`);
       setDisableInputNumber(true);
       setActiveCode(true);
     }).catch((error) => {
-      console.log("code non envoyer");
       setActiveNumero(true);
       toast.error("code non envoyer");
     });
@@ -51,12 +48,10 @@ export default function Home() {
     if(activeCode){
       confirmationResult.confirm(code).then((result) => {
         const user = result.user;
-        console.log("c'est bel et bien le code !");
         toast.success("Votre numero a bien ete verifier");
         setStatut(true);
         setDisableInputCode(true);
       }).catch((error) => {
-        console.log("c'est pas le bon code.");
         toast.error("Le code n'est pas valide");
       });
     }
